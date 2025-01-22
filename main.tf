@@ -17,6 +17,10 @@ module "vpc" {
   source = "./modules/VPC"
 }
 
+module "lambda" {
+  source = "./modules/lambda"
+}
+
 module "buckets" {
   source = "./modules/buckets"
 }
