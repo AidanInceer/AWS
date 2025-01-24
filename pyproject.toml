@@ -14,6 +14,7 @@ retry-requests = "^2.0.0"
 openmeteo-requests = "^1.3.0"
 python-dotenv = "^1.0.1"
 black = "^24.10.0"
+boto3 = "^1.36.4"
 
 
 [build-system]
