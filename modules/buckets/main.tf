@@ -1,7 +1,7 @@
 
 
 resource "aws_s3_bucket" "dev-bucket" {
-  bucket = "dev-bucket-ai98"
+  bucket = "tft-project-dev-bucket"
 
   tags = {
     Name        = "My bucket"
