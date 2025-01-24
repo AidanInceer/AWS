@@ -6,14 +6,15 @@ from botocore.exceptions import ClientError
 
 def lambda_handler(event, context):
 
-    load_user_data()
+    data = load_user_data()
 
-    return {"statusCode": 200, "body": "Success"}
+    return data
 
 
 def load_user_data():
     print("fetching secret")
     secret = get_secret()
+    print(secret)
 
     url = "https://euw1.api.riotgames.com/tft/league/v1/challenger?queue=RANKED_TFT"
     headers = {
@@ -26,6 +27,7 @@ def load_user_data():
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         print(response.status_code)
+        print(response.json())
         return response.json()
     else:
         print(f"Failed to get summoner: {response.status_code}, {response.text}")
