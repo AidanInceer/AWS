@@ -18,7 +18,7 @@ def lambda_handler(event, context):
         "X-Riot-Token": f"{secret}",
     }
 
-    for div in ["challenger"]:  # , "grandmaster", "master"]:
+    for div in ["challenger", "grandmaster", "master"]:
 
         s3 = boto3.client("s3")
         current_date = datetime.now().strftime("%Y-%m-%d")
@@ -26,7 +26,7 @@ def lambda_handler(event, context):
 
         data = load_division_data(s3, current_date, bucket_name, div, headers)
 
-        limit = 2
+        limit = 10
         summoner_ids = extract_summoner_ids(data, limit=limit)
         puuids = save_all_summoner_data(
             summoner_ids, div, headers, s3, bucket_name, current_date, limit
@@ -110,7 +110,7 @@ def extract_summoner_ids(data: dict, limit: int):
 def fetch_all_match_ids(puuids: str, headers: dict):
     match_list = []
     for puuid in puuids:
-        url = f"https://europe.api.riotgames.com/tft/match/v1/matches/by-puuid/{puuid}/ids?start=-1&count=3"
+        url = f"https://europe.api.riotgames.com/tft/match/v1/matches/by-puuid/{puuid}/ids?start=-1&count=10"
         response = requests.get(url, headers=headers)
         time.sleep(0.85)
         if response.status_code == 200:
