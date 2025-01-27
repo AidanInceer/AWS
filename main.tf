@@ -20,15 +20,6 @@ module "iam" {
   source = "./modules/iam"
 }
 
-module "rds" {
-  source      = "./modules/rds"
-  db_password = var.db_password
-
-  # Pass the subnet IDs from the VPC module
-  subnet_a_id = module.vpc.subnet_a_id
-  subnet_b_id = module.vpc.subnet_b_id
-
-}
 
 module "lambda" {
   source = "./modules/lambda"
