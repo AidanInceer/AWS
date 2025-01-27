@@ -14,7 +14,7 @@ provider "aws" {
 
 
 module "vpc" {
-  source = "./modules/VPC"
+  source = "./modules/vpc"
 }
 
 module "lambda" {
@@ -23,4 +23,12 @@ module "lambda" {
 
 module "buckets" {
   source = "./modules/buckets"
+}
+
+module "glue" {
+  source = "./modules/glue"
+}
+
+module "iam" {
+  source = "./modules/iam"
 }
