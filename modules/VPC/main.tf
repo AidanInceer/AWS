@@ -7,23 +7,24 @@ resource "aws_vpc" "main" {
   }
 }
 
-# Public Subnet
-resource "aws_subnet" "public" {
+# Subnet A in AZ eu-west-2a
+resource "aws_subnet" "subnet_a" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
   availability_zone       = "eu-west-2a"
   tags = {
-    Name = "public-subnet"
+    Name = "subnet_a"
   }
 }
 
-# Private Subnet
-resource "aws_subnet" "private" {
+# Subnet B in AZ eu-west-2b
+resource "aws_subnet" "subnet_b" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.2.0/24"
-  availability_zone = "eu-west-2a"
+  availability_zone = "eu-west-2b"
   tags = {
-    Name = "private-subnet"
+    Name = "subnet_b"
   }
 }
+

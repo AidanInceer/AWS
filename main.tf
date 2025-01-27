@@ -12,9 +12,22 @@ provider "aws" {
   profile = "default"
 }
 
-
 module "vpc" {
   source = "./modules/vpc"
+}
+
+module "iam" {
+  source = "./modules/iam"
+}
+
+module "rds" {
+  source      = "./modules/rds"
+  db_password = var.db_password
+
+  # Pass the subnet IDs from the VPC module
+  subnet_a_id = module.vpc.subnet_a_id
+  subnet_b_id = module.vpc.subnet_b_id
+
 }
 
 module "lambda" {
@@ -25,10 +38,4 @@ module "buckets" {
   source = "./modules/buckets"
 }
 
-module "glue" {
-  source = "./modules/glue"
-}
 
-module "iam" {
-  source = "./modules/iam"
-}
