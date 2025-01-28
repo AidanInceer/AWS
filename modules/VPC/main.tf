@@ -1,5 +1,4 @@
-resource "aws_vpc" "main" {
-  cidr_block           = "10.0.0.0/16"
+resource "aws_default_vpc" "main" {
   enable_dns_support   = true
   enable_dns_hostnames = true
   tags = {
@@ -8,23 +7,16 @@ resource "aws_vpc" "main" {
 }
 
 # Subnet A in AZ eu-west-2a
-resource "aws_subnet" "subnet_a" {
-  vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.0.1.0/24"
-  map_public_ip_on_launch = true
-  availability_zone       = "eu-west-2a"
-  tags = {
-    Name = "subnet_a"
-  }
+resource "aws_default_subnet" "subnet_a" {
+  availability_zone = "eu-west-2a"
 }
 
 # Subnet B in AZ eu-west-2b
-resource "aws_subnet" "subnet_b" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.2.0/24"
+resource "aws_default_subnet" "subnet_b" {
   availability_zone = "eu-west-2b"
-  tags = {
-    Name = "subnet_b"
-  }
 }
 
+# Subnet C in AZ eu-west-2c
+resource "aws_default_subnet" "subnet_c" {
+  availability_zone = "eu-west-2c"
+}

@@ -29,4 +29,12 @@ module "buckets" {
   source = "./modules/buckets"
 }
 
+module "redshift" {
+  source = "./modules/redshift"
+}
 
+module "glue" {
+  source     = "./modules/glue"
+  glue_role  = module.iam.glue_role
+  dev_code_bucket = module.buckets.dev_code_bucket
+}
